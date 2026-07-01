@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from model import CNNBiLSTM
 from auth_routes import router as auth_router
+from llm import generate_reply
 
 # ---------- load model artifacts ----------
 ART = "model_artifacts"
@@ -38,6 +39,7 @@ app.include_router(auth_router)     # adds /auth/signup, /auth/login, /auth/me
 
 class Msg(BaseModel):
     message: str
+    history: list = []
 
 @app.get("/health")
 def health():
@@ -56,5 +58,5 @@ def predict(req: Msg):
         "intent": intent,
         "confidence": confidence,
         "escalate": escalate,
-        "suggested_reply": response_map.get(intent, "Let me connect you with an agent."),
+        "suggested_reply": generate_reply(req.message, intent, escalate, response_map, req.history),
     }

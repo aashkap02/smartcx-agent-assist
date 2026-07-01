@@ -1,1 +1,1 @@
-{"vocab_size": 979, "n_classes": 27, "max_len": 30, "emb": 128, "hid": 128, "escalate_intents": ["complaint", "contact_human_agent", "review"], "low_confidence_threshold": 0.4}
+{"vocab_size": 979, "n_classes": 27, "max_len": 30, "emb": 128, "hid": 128, "escalate_intents": ["complaint", "contact_human_agent", "review"], "low_confidence_threshold": 0.55}

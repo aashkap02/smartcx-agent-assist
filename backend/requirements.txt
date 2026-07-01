@@ -11,3 +11,4 @@ pyjwt
 bcrypt
 python-dotenv
 email-validator
+groq==1.5.0

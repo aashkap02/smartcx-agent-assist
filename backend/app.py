@@ -52,7 +52,8 @@ def predict(req: Msg):
         conf, idx = probs.max(0)
     intent = inv_label[idx.item()]
     confidence = round(conf.item(), 3)
-    escalate = (intent in config["escalate_intents"]) or (confidence < config["low_confidence_threshold"])
+    escalate = (intent in config["escalate_intents"] and confidence >= 0.60) or (confidence < 0.15)
+    
     return {
         "message": req.message,
         "intent": intent,
